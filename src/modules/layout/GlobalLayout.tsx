@@ -2,7 +2,7 @@ import {
     Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel,
     Avatar,
     Box,
-    Button,
+    Button as ChakraButton,
     Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay,
     Flex,
     HStack,
@@ -23,6 +23,7 @@ import {Stepper} from "../slides/Stepper";
 import React, {ReactNode} from "react";
 import {IoFilter} from "react-icons/io5";
 import {RangeSlide, RangeSliderWithText} from "../range/RangeSlide";
+import {Button} from "../../components/common/Button";
 
 const Links = ['Link One', 'Link Two', 'Link Three', 'Link Four'];
 
@@ -41,7 +42,7 @@ export function GlobalLayout(props: GlobalLayoutProps) {
                 <Box>
                     <Text>Logo</Text>
                 </Box>
-                <IconButton ref={buttonRef} onClick={onOpen} bg={'transparent'} aria-label={'filter'}>
+                <IconButton display={{base: 'initial', lg: 'none'}} ref={buttonRef} onClick={onOpen} bg={'transparent'} aria-label={'filter'}>
                     <IoFilter size={'1.5rem'}/>
                 </IconButton>
             </Box>
@@ -128,10 +129,10 @@ export function GlobalLayout(props: GlobalLayoutProps) {
                     </DrawerBody>
 
                     <DrawerFooter>
-                        <Button variant='outline' mr={3} onClick={onClose}>
-                            Cancel
-                        </Button>
-                        <Button colorScheme='blue'>Save</Button>
+                        <ChakraButton variant='outline' mr={3} onClick={onClose}>
+                            Clear All
+                        </ChakraButton>
+                        <Button >Apply Filters</Button>
                     </DrawerFooter>
                 </DrawerContent>
             </Drawer>
