@@ -1,0 +1,40 @@
+.property-listing--image {
+    position: relative;
+    display: inline-block;
+}
+.property-listing--image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 80%;
+    width: 100%;
+    display: block;
+    background: linear-gradient(180deg, rgba(0,0,0,1), rgba(27,27,27,0.8));
+}
+.image {
+    position: relative;
+    display: inline-block;
+}
+.image::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 80%;
+    width: 100%;
+    display: block;
+    background: linear-gradient(180deg, rgba(0,0,0,1), rgba(27,27,27,0.8));
+}
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 10%;
+    background: linear-gradient(-45deg, rgba(0,0,0,0), rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.2) 80%, rgba(27,27,27,0.5));
+    opacity: 0.5;
+}
+/*.overlay:hover {
+    opacity: 0;
+    transition: all 200ms;
+}*/
