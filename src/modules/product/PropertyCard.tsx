@@ -166,6 +166,10 @@ interface Facets {
     hasWifi: boolean;
 }
 
+interface IFacets {
+
+}
+
 interface PropertyCardProps {
     property: PropertyListing;
 }

@@ -42,7 +42,7 @@ export function GlobalLayout(props: GlobalLayoutProps) {
                 <Box>
                     <Text>Logo</Text>
                 </Box>
-                <IconButton display={{base: 'initial', lg: 'none'}} ref={buttonRef} onClick={onOpen} bg={'transparent'} aria-label={'filter'}>
+                <IconButton display={{base: 'inline-flex', lg: 'none'}} ref={buttonRef} onClick={onOpen} bg={'transparent'} aria-label={'filter'}>
                     <IoFilter size={'1.5rem'}/>
                 </IconButton>
             </Box>

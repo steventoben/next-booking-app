@@ -1,9 +1,11 @@
 import {NextPage} from "next";
 import {GlobalLayout} from "../../src/modules/layout/GlobalLayout";
-import {Box, Input, InputAddon, InputGroup, Spacer, useColorModeValue} from "@chakra-ui/react";
+import {Box, Input, InputAddon, InputGroup, Spacer, Tag as ChakraTag, useColorModeValue} from "@chakra-ui/react";
 import {MdOutlineSearch} from "react-icons/md";
 import {PropertyListingsGrid} from "../../src/modules/product/ProductGrid";
 import {Tags} from "../../src/modules/tags/Tags";
+import {Tag} from "../../src/modules/tags/Tag";
+import {FilterRow} from "../../src/modules/filters/FilterRow";
 
 const ListingsPage: NextPage = () => {
     return(
@@ -17,7 +19,12 @@ const ListingsPage: NextPage = () => {
                 </InputGroup>
                 {/*<Spacer h={'1rem'}/>*/}
                 <Box>
-                    <Tags tags={['New York', 'Lima', 'Toronto', 'Paris', 'Bora Bora', 'London']}/>
+                    {/*<Tags tags={['New York', 'Lima', 'Toronto', 'Paris', 'Bora Bora', 'London']}/>*/}
+                    {/*<Tag label={'New York'}/>*/}
+                    {/*<ChakraTag bg={'hsla(50,40%,30%,1)'} variant={'outline'}>{'Toronto'}</ChakraTag>*/}
+                </Box>
+                <Box>
+                    <FilterRow/>
                 </Box>
             </Box>
             <Box bg={useColorModeValue('gray.100', 'gray.900')}>

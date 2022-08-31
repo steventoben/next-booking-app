@@ -9,7 +9,7 @@ export function Tags(props: TagsProps) {
         tags
     } = props;
     return(
-        <Box display={'flex'} justifyContent={'space-between'} maxW={'32rem'} w={'100%'}>
+        <Box display={'flex'} justifyContent={'space-between'} maxW={'32rem'} w={'32rem'}>
             {tags.map((tag) => {
                 return(
                     <Tag key={tag} label={tag}/>
