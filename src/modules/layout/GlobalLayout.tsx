@@ -1,6 +1,6 @@
 import {
     Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel,
-    Avatar,
+    Avatar, Badge,
     Box,
     Button as ChakraButton,
     Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay,
@@ -10,7 +10,7 @@ import {
     Menu,
     MenuButton, MenuDivider, MenuItem,
     MenuList, RangeSlider, Spacer,
-    Stack, Text, useColorModeValue,
+    Stack, Tag, TagCloseButton, TagLabel, Text, useColorModeValue,
     useDisclosure
 } from "@chakra-ui/react";
 import {MdClose, MdOutlineSearch} from "react-icons/md";
@@ -24,8 +24,18 @@ import React, {ReactNode} from "react";
 import {IoFilter} from "react-icons/io5";
 import {RangeSlide, RangeSliderWithText} from "../range/RangeSlide";
 import {Button} from "../../components/common/Button";
+import {Checkbox} from "../../components/common/Checkbox";
+import {CheckboxGroup, OptionType} from "../../components/common/CheckboxGroup";
 
 const Links = ['Link One', 'Link Two', 'Link Three', 'Link Four'];
+
+const propertyTypeOptions: OptionType[] = [
+    {value: 'HOUSE', label: 'House'},
+    {value: 'HOTEL', label: 'Hotel'},
+    {value: 'APARTMENT', label: 'Apartment'},
+    {value: 'CONDO', label: 'Condo'},
+    {value: 'RESORT', label: 'Resort'},
+];
 
 interface GlobalLayoutProps {
     children: ReactNode;
@@ -36,6 +46,13 @@ export function GlobalLayout(props: GlobalLayoutProps) {
     } = props;
     const { isOpen, onOpen, onClose } = useDisclosure();
     const buttonRef = React.useRef(null);
+    const [filters, setFilters] = React.useState({'Type': [] as (string|number)[]});
+    function handleTypeChange(ev: React.ChangeEvent, value: (string|number)[]) {
+        //alert(ev.target);
+        setFilters(prevState => ({...prevState, 'Type': value}));
+        //console.log(ev.target);
+        console.log(ev);
+    }
     return(
         <>
             <Box display={'flex'} justifyContent={'space-between'} alignItems={'center'} as={'header'} width={'100%'} bg={useColorModeValue('gray.50', 'gray.900')} position={'fixed'} zIndex={1000} height={'4rem'} px={'1rem'}>
@@ -60,6 +77,14 @@ export function GlobalLayout(props: GlobalLayoutProps) {
 
                     <DrawerBody padding={0}>
                         <Accordion defaultIndex={[0]} allowMultiple>
+                            <Box>
+                                <Text>Selected Filters</Text>
+                                {filters.Type.map(v => {
+                                    return(
+                                        <Tag key={v}><TagLabel>{v}</TagLabel><TagCloseButton onClick={()=>setFilters(prevState => ({...prevState, 'Type': prevState.Type.filter(val => val !== v)}))}/></Tag>
+                                    );
+                                })}
+                            </Box>
                             <AccordionItem>
                                 <h2>
                                     <AccordionButton p={'1rem'} justifyContent={'space-between'}>
@@ -102,14 +127,16 @@ export function GlobalLayout(props: GlobalLayoutProps) {
                             <AccordionItem>
                                 <h2>
                                     <AccordionButton p={'1rem'} justifyContent={'space-between'}>
-                                        <Box>
+                                        <Box display={'flex'} flexDirection={'column'} alignItems={'start'}>
                                             <Text fontSize={'1.25rem'} fontWeight={400}>Type</Text>
+                                            <Text fontSize={'0.875rem'}>{filters.Type.map((v: string|number) => typeof v === "number" ? v=v.toString() : v.charAt(0).concat(v.substring(1).toLowerCase())).toString().replaceAll(',', ', ')}</Text>
+                                            {/*<Badge colorScheme={'blue'} variant={'subtle'}>{filters.Type}</Badge>*/}
                                         </Box>
                                         <AccordionIcon/>
                                     </AccordionButton>
                                 </h2>
                                 <AccordionPanel marginRight={'0.25rem'} marginLeft={'-0.25rem'} paddingX={'1.5rem'} paddingTop={0} paddingBottom={'2rem'}>
-
+                                    <CheckboxGroup onChange={handleTypeChange} options={propertyTypeOptions}/>
                                 </AccordionPanel>
                             </AccordionItem>
                             <AccordionItem>

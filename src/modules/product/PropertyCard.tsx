@@ -179,7 +179,7 @@ export function PropertyCard(props: PropertyCardProps) {
     } = props;
     return(
         <Link passHref href={`/listing/${encodeURIComponent(property.id)}`}>
-        <Box borderRadius={4} overflow={'hidden'} /*border={'2px solid'}*/ boxShadow={'2px 2px 5px hsla(0,0%,0%,0.15)'} bg={'white'} as={'article'} id={'property-listing'} data-auto-id={PropertyCard.name}>
+        <Box borderRadius={4} overflow={'hidden'} /*border={'2px solid'}*/ boxShadow={'2px 2px 5px hsla(0,0%,0%,0.15)'} _hover={{boxShadow: '4px 4px 10px hsla(0,0%,0%,0.25), -4px -4px 8px hsla(0,0%,0%,0.25)'}} transition={'all 150ms ease'} bg={'white'} as={'article'} id={'property-listing'} data-auto-id={PropertyCard.name}>
             {/*<IconButton bg={'transparent'} position={'absolute'} zIndex={500} aria-label={'favorite'}>
                 <MdFavoriteBorder color={'white'}/>
             </IconButton>*/}

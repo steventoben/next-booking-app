@@ -6,6 +6,7 @@ import {PropertyListingsGrid} from "../../src/modules/product/ProductGrid";
 import {Tags} from "../../src/modules/tags/Tags";
 import {Tag} from "../../src/modules/tags/Tag";
 import {FilterRow} from "../../src/modules/filters/FilterRow";
+import {FacetsList} from "../../src/modules/facets/FacetsList";
 
 const ListingsPage: NextPage = () => {
     return(
@@ -27,7 +28,9 @@ const ListingsPage: NextPage = () => {
                     <FilterRow/>
                 </Box>
             </Box>
-            <Box bg={useColorModeValue('gray.100', 'gray.900')}>
+            <Box display={'flex'} bg={useColorModeValue('gray.100', 'gray.900')}>
+                <FacetsList/>
+                <Box display={{base: 'none', lg: 'block'}} width={'20rem'}/>
                 <PropertyListingsGrid/>
             </Box>
         </GlobalLayout>

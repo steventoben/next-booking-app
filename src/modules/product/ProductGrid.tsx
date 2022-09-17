@@ -54,7 +54,7 @@ export function ProductGrid(props: ProductGridProps) {
 export function PropertyListingsGrid(props: ProductGridProps) {
     const {} = props;
     return(
-        <Box maxWidth={'60em'} marginX={{base: '1rem', md: '1rem', lg: 'auto'}} bg={useColorModeValue('gray.100', 'gray.900')} data-auto-id={PropertyListingsGrid.name}>
+        <Box flex={'1 1 auto'} maxWidth={'60em'} marginX={{base: '1rem', md: '1rem', lg: 'auto'}} bg={useColorModeValue('gray.100', 'gray.900')} data-auto-id={PropertyListingsGrid.name}>
             <Box bg={useColorModeValue('gray.100', 'gray.900')} as={'section'} gap={{base: '0.5rem', md: '0.5rem', lg: '1rem'}} sx={{display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(16rem, 1fr))'}}>
                 {PROPERTY_LISTINGS.map((property, index) => {
                     return(
