@@ -22,13 +22,15 @@ export type OptionType = {
 interface CheckboxGroupProps {
     options: OptionType[];
     onChange: Function;
+    activeValues?: Array<string|number>;
 }
 export function CheckboxGroup(props: CheckboxGroupProps) {
     const {
         options,
-        onChange: onChangeCb
+        onChange: onChangeCb,
+        activeValues = []
     } = props;
-    const {value, getCheckboxProps, onChange: onGroupChange, setValue} = useCheckboxGroup({defaultValue: []});
+    const {value, getCheckboxProps, onChange: onGroupChange, setValue} = useCheckboxGroup({defaultValue: activeValues});
     function handleChange(ev: React.ChangeEvent) {
         //setValue(prevState => [...prevState, ev.target.getAttribute('value')||'ERROR'])
         console.log(value);

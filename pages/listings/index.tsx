@@ -1,7 +1,7 @@
 import {NextPage} from "next";
 import {GlobalLayout} from "../../src/modules/layout/GlobalLayout";
 import {
-    Box,
+    Box, Button,
     HStack,
     Input,
     InputAddon,
@@ -38,7 +38,7 @@ const ListingsPage: NextPage = () => {
                     <Tag leftIcon={<MdLocationPin/>} label={'My Location'}/>
                     {['New York', 'Lima', 'Toronto', 'Paris'].map((location: string) => {
                         return(
-                            <Tag label={location} key={location}/>
+                            <Button  children={location} key={location}/>
                         );
                     })}
                     {/*<ChakraTag bg={'hsla(50,40%,30%,1)'} variant={'outline'}>{'Toronto'}</ChakraTag>*/}

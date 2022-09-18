@@ -108,18 +108,18 @@ export function GlobalLayout(props: GlobalLayoutProps) {
 
                     <DrawerBody padding={0}>
                         <Accordion defaultIndex={[]} allowMultiple>
-                            <Box>
+                            {/*<Box>
                                 <Text>Selected Filters</Text>
                                 {filters.Type.map(v => {
                                     return(
                                         <Tag key={v}><TagLabel>{v}</TagLabel><TagCloseButton onClick={()=>setFilters(prevState => ({...prevState, 'Type': prevState.Type.filter(val => val !== v)}))}/></Tag>
                                     );
                                 })}
-                            </Box>
+                            </Box>*/}
                             <AccordionItem>
                                 <h2>
                                     <AccordionButton p={'1rem'} justifyContent={'space-between'}>
-                                        <Box display={'flex'} alignItems={'baseline'}>
+                                        <Box display={'flex'} flexDirection={'column'} alignItems={'start'}>
                                             <Text fontSize={'1.25rem'} fontWeight={400}>Price</Text>
                                             <Text fontSize={'0.875rem'} fontWeight={400}>${ctx.priceFilter[0]} - ${ctx.priceFilter[1]}</Text>
                                         </Box>
@@ -133,7 +133,7 @@ export function GlobalLayout(props: GlobalLayoutProps) {
                             <AccordionItem>
                                 <h2>
                                     <AccordionButton p={'1rem'} justifyContent={'space-between'}>
-                                        <Box display={'flex'} alignItems={'baseline'}>
+                                        <Box display={'flex'} flexDirection={'column'} alignItems={'start'}>
                                             <Text fontSize={'1.25rem'} fontWeight={400}>Location</Text>
                                             <Text fontSize={'0.875rem'} fontWeight={400}>{ctx.locationFilter} miles</Text>
                                         </Box>
@@ -147,7 +147,7 @@ export function GlobalLayout(props: GlobalLayoutProps) {
                             <AccordionItem>
                                 <h2>
                                     <AccordionButton p={'1rem'} justifyContent={'space-between'}>
-                                        <Box display={'flex'} alignItems={'baseline'}>
+                                        <Box display={'flex'} flexDirection={'column'} alignItems={'start'}>
                                             <Text fontSize={'1.25rem'} fontWeight={400}>Guests</Text>
                                             <Text fontSize={'0.875rem'} fontWeight={400}>{ctx.guestsFilter}</Text>
                                         </Box>
@@ -155,7 +155,7 @@ export function GlobalLayout(props: GlobalLayoutProps) {
                                     </AccordionButton>
                                 </h2>
                                 <AccordionPanel marginRight={'0.25rem'} marginLeft={'-0.25rem'} paddingX={'1.5rem'} paddingTop={0} paddingBottom={'2rem'}>
-                                    <CheckboxGroup onChange={handleGuestsChange} options={guestsOptions}/>
+                                    <CheckboxGroup onChange={handleGuestsChange} options={guestsOptions} activeValues={ctx.guestsFilter}/>
                                 </AccordionPanel>
                             </AccordionItem>
                             <AccordionItem>
@@ -170,7 +170,7 @@ export function GlobalLayout(props: GlobalLayoutProps) {
                                     </AccordionButton>
                                 </h2>
                                 <AccordionPanel marginRight={'0.25rem'} marginLeft={'-0.25rem'} paddingX={'1.5rem'} paddingTop={0} paddingBottom={'2rem'}>
-                                    <CheckboxGroup onChange={handleTypeChange} options={propertyTypeOptions}/>
+                                    <CheckboxGroup onChange={handleTypeChange} options={propertyTypeOptions} activeValues={ctx.typesFilter}/>
                                 </AccordionPanel>
                             </AccordionItem>
                             <AccordionItem>

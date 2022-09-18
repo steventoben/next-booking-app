@@ -67,12 +67,15 @@ export function RangeSlide(props: RangeSlideProps) {
         </RangeSlider>
     )
 }
+interface Props {
+
+}
 export function RangeSliderWithText() {
-    const [sliderValues, setSliderValues] = React.useState([0, 1000]);
+    const {setPriceFilter, setFiltersState, priceFilter} = useFilters();
+    const [sliderValues, setSliderValues] = React.useState(priceFilter || [0, 1000]);
     const [sliderValueMin, setSliderValueMin] = React.useState(0);
     const [sliderValueMax, setSliderValueMax] = React.useState(100);
     const [showTooltip, setShowTooltip] = React.useState(false);
-    const {setPriceFilter, setFiltersState} = useFilters();
     useUpdateEffect(() => {
         setPriceFilter(sliderValues);
         setFiltersState((prevState: IFilters) => ({...prevState, price: {...prevState.price, value: {_from: sliderValues[0], _to: sliderValues[1]}}}));
@@ -87,7 +90,7 @@ export function RangeSliderWithText() {
         <RangeSlider
             id='slider'
             aria-label={['min', 'max']}
-            defaultValue={[0, 1000]}
+            defaultValue={sliderValues || [0, 1000]}
             min={0}
             max={1000}
             colorScheme='teal'
@@ -136,9 +139,9 @@ export function RangeSliderWithText() {
 interface SlideProps {}
 export function Slide(props: SlideProps) {
     const {} = props;
-    const [sliderValue, setSliderValue] = React.useState(10)
-    const [showTooltip, setShowTooltip] = React.useState(false)
     const {setLocationFilter, locationFilter, setFiltersState} = useFilters();
+    const [sliderValue, setSliderValue] = React.useState(locationFilter || 10)
+    const [showTooltip, setShowTooltip] = React.useState(false)
     useUpdateEffect(()=>{
         setLocationFilter(sliderValue);
         setFiltersState((prevState: IFilters) => ({...prevState, location: {...prevState.location, value: {...prevState.location.value, distance: sliderValue}}}))
@@ -146,7 +149,7 @@ export function Slide(props: SlideProps) {
     return (
         <Slider
             id='slider'
-            defaultValue={10}
+            defaultValue={sliderValue}
             min={0}
             max={50}
             colorScheme='teal'
