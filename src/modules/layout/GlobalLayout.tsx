@@ -22,10 +22,11 @@ import {GiHamburgerMenu} from 'react-icons/gi';
 import {Stepper} from "../slides/Stepper";
 import React, {ReactNode} from "react";
 import {IoFilter} from "react-icons/io5";
-import {RangeSlide, RangeSliderWithText} from "../range/RangeSlide";
+import {RangeSlide, RangeSliderWithText, Slide} from "../range/RangeSlide";
 import {Button} from "../../components/common/Button";
 import {Checkbox} from "../../components/common/Checkbox";
 import {CheckboxGroup, OptionType} from "../../components/common/CheckboxGroup";
+import {IFilters, useFilters} from "../filters/FiltersProvider";
 
 const Links = ['Link One', 'Link Two', 'Link Three', 'Link Four'];
 
@@ -36,6 +37,21 @@ const propertyTypeOptions: OptionType[] = [
     {value: 'CONDO', label: 'Condo'},
     {value: 'RESORT', label: 'Resort'},
 ];
+const guestsOptions: OptionType[] = [
+    {value: 1, label: 'One'},
+    {value: 2, label: 'Two'},
+    {value: 3, label: 'Three'},
+    {value: 4, label: 'Four'},
+    {value: 5, label: 'Over Five'},
+];
+
+const locationRangeOptions: OptionType[] = [
+    {value: '0,5', label: 'Less than 5 miles away'},
+    {value: '0,5', label: 'Less than 5 miles away'},
+    {value: '0,5', label: 'Less than 5 miles away'},
+    {value: '0,5', label: 'Less than 5 miles away'},
+    {value: '50', label: '50 miles away'},
+];
 
 interface GlobalLayoutProps {
     children: ReactNode;
@@ -45,11 +61,14 @@ export function GlobalLayout(props: GlobalLayoutProps) {
         children
     } = props;
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const ctx = useFilters();
     const buttonRef = React.useRef(null);
     const [filters, setFilters] = React.useState({'Type': [] as (string|number)[]});
     function handleTypeChange(ev: React.ChangeEvent, value: (string|number)[]) {
         //alert(ev.target);
         setFilters(prevState => ({...prevState, 'Type': value}));
+
+        ctx.setFiltersState((prevState: IFilters) => ({...prevState, types: value}))
         //console.log(ev.target);
         console.log(ev);
     }
@@ -101,27 +120,29 @@ export function GlobalLayout(props: GlobalLayoutProps) {
                             <AccordionItem>
                                 <h2>
                                     <AccordionButton p={'1rem'} justifyContent={'space-between'}>
-                                        <Box>
+                                        <Box display={'flex'} alignItems={'baseline'}>
                                             <Text fontSize={'1.25rem'} fontWeight={400}>Location</Text>
+                                            <Text fontSize={'0.875rem'} fontWeight={400}>{ctx.locationFilter} miles</Text>
                                         </Box>
                                         <AccordionIcon/>
                                     </AccordionButton>
                                 </h2>
                                 <AccordionPanel marginRight={'0.25rem'} marginLeft={'-0.25rem'} paddingX={'1.5rem'} paddingTop={0} paddingBottom={'2rem'}>
-                                    <RangeSliderWithText/>
+                                    <Slide/>
                                 </AccordionPanel>
                             </AccordionItem>
                             <AccordionItem>
                                 <h2>
                                     <AccordionButton p={'1rem'} justifyContent={'space-between'}>
-                                        <Box>
+                                        <Box display={'flex'} alignItems={'baseline'}>
                                             <Text fontSize={'1.25rem'} fontWeight={400}>Guests</Text>
+                                            <Text fontSize={'0.875rem'} fontWeight={400}>{ctx.guestsFilter}</Text>
                                         </Box>
                                         <AccordionIcon/>
                                     </AccordionButton>
                                 </h2>
                                 <AccordionPanel marginRight={'0.25rem'} marginLeft={'-0.25rem'} paddingX={'1.5rem'} paddingTop={0} paddingBottom={'2rem'}>
-                                    <RangeSliderWithText/>
+                                    <CheckboxGroup onChange={handleTypeChange} options={guestsOptions}/>
                                 </AccordionPanel>
                             </AccordionItem>
                             <AccordionItem>

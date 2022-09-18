@@ -1,5 +1,5 @@
 import {Box} from "@chakra-ui/react";
-import {Dropdown} from "../dropdown/Dropdown";
+import {Dropdown, StxDropdown} from "../dropdown/Dropdown";
 
 interface FilterRowProps {}
 export function FilterRow(props: FilterRowProps) {
@@ -7,6 +7,7 @@ export function FilterRow(props: FilterRowProps) {
     return(
         <Box>
             <Dropdown/>
+            <StxDropdown/>
         </Box>
     );
 }

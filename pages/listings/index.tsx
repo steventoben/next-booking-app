@@ -7,6 +7,7 @@ import {Tags} from "../../src/modules/tags/Tags";
 import {Tag} from "../../src/modules/tags/Tag";
 import {FilterRow} from "../../src/modules/filters/FilterRow";
 import {FacetsList} from "../../src/modules/facets/FacetsList";
+import {FiltersProvider} from "../../src/modules/filters/FiltersProvider";
 
 const ListingsPage: NextPage = () => {
     return(
@@ -36,4 +37,4 @@ const ListingsPage: NextPage = () => {
         </GlobalLayout>
     );
 };
-export default ListingsPage;
+export default () => <FiltersProvider><ListingsPage/></FiltersProvider>;

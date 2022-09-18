@@ -10,6 +10,7 @@ class Document extends NextDocument {
                     <ColorModeScript initialColorMode={'light'}/>
                     <Main/>
                     <NextScript/>
+                    <div id={'portal'} style={{position: 'fixed', top: 0, left: 0}}></div>
                 </body>
             </Html>
         );
