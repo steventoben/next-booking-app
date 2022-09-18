@@ -99,10 +99,10 @@ export function FiltersProvider(props: FiltersProviderProps) {
     } = props;
     const [filtersState, setFiltersState] = React.useState(filters);
     //const [activeFilters, setActiveFilters] = React.useState();
-    const [priceFilter, setPriceFilter] = React.useState();
+    const [priceFilter, setPriceFilter] = React.useState([0, 1000]);
     const [locationFilter, setLocationFilter] = React.useState();
     const [guestsFilter, setGuestsFilter] = React.useState();
-    const [typesFilter, setTypesFilter] = React.useState();
+    const [typesFilter, setTypesFilter] = React.useState([]);
     const [ratingFilter, setRatingFilter] = React.useState();
     return(
         <FiltersContext.Provider value={{filtersState, setFiltersState,priceFilter, setPriceFilter,locationFilter, setLocationFilter,guestsFilter, setGuestsFilter,typesFilter, setTypesFilter,ratingFilter, setRatingFilter}}>

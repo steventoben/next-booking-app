@@ -10,7 +10,7 @@ import {
     Tooltip, useUpdateEffect
 } from "@chakra-ui/react";
 import React from "react";
-import {useFilters} from "../filters/FiltersProvider";
+import {IFilters, useFilters} from "../filters/FiltersProvider";
 
 interface RangeSlideProps {}
 export function RangeSlide(props: RangeSlideProps) {
@@ -71,7 +71,12 @@ export function RangeSliderWithText() {
     const [sliderValues, setSliderValues] = React.useState([0, 1000]);
     const [sliderValueMin, setSliderValueMin] = React.useState(0);
     const [sliderValueMax, setSliderValueMax] = React.useState(100);
-    const [showTooltip, setShowTooltip] = React.useState(false)
+    const [showTooltip, setShowTooltip] = React.useState(false);
+    const {setPriceFilter, setFiltersState} = useFilters();
+    useUpdateEffect(() => {
+        setPriceFilter(sliderValues);
+        setFiltersState((prevState: IFilters) => ({...prevState, price: {...prevState.price, value: {_from: sliderValues[0], _to: sliderValues[1]}}}));
+    }, [sliderValues]);
     return (
         <>
             <Flex pb={'1rem'} justifyContent={'center'}>
@@ -133,9 +138,10 @@ export function Slide(props: SlideProps) {
     const {} = props;
     const [sliderValue, setSliderValue] = React.useState(10)
     const [showTooltip, setShowTooltip] = React.useState(false)
-    const {setLocationFilter, locationFilter} = useFilters();
+    const {setLocationFilter, locationFilter, setFiltersState} = useFilters();
     useUpdateEffect(()=>{
         setLocationFilter(sliderValue);
+        setFiltersState((prevState: IFilters) => ({...prevState, location: {...prevState.location, value: {...prevState.location.value, distance: sliderValue}}}))
     },[sliderValue]);
     return (
         <Slider

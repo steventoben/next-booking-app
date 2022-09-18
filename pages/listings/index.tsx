@@ -1,13 +1,26 @@
 import {NextPage} from "next";
 import {GlobalLayout} from "../../src/modules/layout/GlobalLayout";
-import {Box, Input, InputAddon, InputGroup, Spacer, Tag as ChakraTag, useColorModeValue} from "@chakra-ui/react";
-import {MdOutlineSearch} from "react-icons/md";
+import {
+    Box,
+    HStack,
+    Input,
+    InputAddon,
+    InputGroup,
+    Spacer,
+    Tag as ChakraTag,
+    useColorModeValue
+} from "@chakra-ui/react";
+import {MdLocationPin, MdOutlineSearch} from "react-icons/md";
 import {PropertyListingsGrid} from "../../src/modules/product/ProductGrid";
 import {Tags} from "../../src/modules/tags/Tags";
 import {Tag} from "../../src/modules/tags/Tag";
 import {FilterRow} from "../../src/modules/filters/FilterRow";
 import {FacetsList} from "../../src/modules/facets/FacetsList";
 import {FiltersProvider} from "../../src/modules/filters/FiltersProvider";
+import {HiLocationMarker} from "react-icons/hi";
+import {BiCurrentLocation} from "react-icons/bi";
+import {GrLocationPin} from "react-icons/gr";
+
 
 const ListingsPage: NextPage = () => {
     return(
@@ -20,14 +33,19 @@ const ListingsPage: NextPage = () => {
                     <Input bg={'white'}/>
                 </InputGroup>
                 {/*<Spacer h={'1rem'}/>*/}
-                <Box>
+                <HStack>
                     {/*<Tags tags={['New York', 'Lima', 'Toronto', 'Paris', 'Bora Bora', 'London']}/>*/}
-                    {/*<Tag label={'New York'}/>*/}
+                    <Tag leftIcon={<MdLocationPin/>} label={'My Location'}/>
+                    {['New York', 'Lima', 'Toronto', 'Paris'].map((location: string) => {
+                        return(
+                            <Tag label={location} key={location}/>
+                        );
+                    })}
                     {/*<ChakraTag bg={'hsla(50,40%,30%,1)'} variant={'outline'}>{'Toronto'}</ChakraTag>*/}
-                </Box>
-                <Box>
+                </HStack>
+                {/*<Box>
                     <FilterRow/>
-                </Box>
+                </Box>*/}
             </Box>
             <Box display={'flex'} bg={useColorModeValue('gray.100', 'gray.900')}>
                 <FacetsList/>

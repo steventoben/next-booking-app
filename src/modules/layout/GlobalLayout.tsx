@@ -25,7 +25,7 @@ import {IoFilter} from "react-icons/io5";
 import {RangeSlide, RangeSliderWithText, Slide} from "../range/RangeSlide";
 import {Button} from "../../components/common/Button";
 import {Checkbox} from "../../components/common/Checkbox";
-import {CheckboxGroup, OptionType} from "../../components/common/CheckboxGroup";
+import {CheckboxGroup, OptionType, StarsCheckboxGroup} from "../../components/common/CheckboxGroup";
 import {IFilters, useFilters} from "../filters/FiltersProvider";
 
 const Links = ['Link One', 'Link Two', 'Link Three', 'Link Four'];
@@ -64,13 +64,25 @@ export function GlobalLayout(props: GlobalLayoutProps) {
     const ctx = useFilters();
     const buttonRef = React.useRef(null);
     const [filters, setFilters] = React.useState({'Type': [] as (string|number)[]});
+    function handleGuestsChange(ev: React.ChangeEvent, value: (string|number)[]) {
+        //alert(ev.target);
+        setFilters(prevState => ({...prevState, 'Type': value}));
+        ctx.setGuestsFilter(value);
+        ctx.setFiltersState((prevState: IFilters) => ({...prevState, guests: {...prevState.guests, value: value}}))
+        //console.log(ev.target);
+        console.log(ev);
+    }
     function handleTypeChange(ev: React.ChangeEvent, value: (string|number)[]) {
         //alert(ev.target);
         setFilters(prevState => ({...prevState, 'Type': value}));
-
-        ctx.setFiltersState((prevState: IFilters) => ({...prevState, types: value}))
+        ctx.setTypesFilter(value);
+        ctx.setFiltersState((prevState: IFilters) => ({...prevState, types: {...prevState.types, value: value}}))
         //console.log(ev.target);
         console.log(ev);
+    }
+    function handleStarChange(ev: React.ChangeEvent, value: string|number) {
+        ctx.setRatingFilter(value);
+        ctx.setFiltersState((prevState: IFilters) => ({...prevState, rating: {...prevState.rating, value: {...prevState.rating.value, _from: parseInt(value as string)}}}));
     }
     return(
         <>
@@ -95,7 +107,7 @@ export function GlobalLayout(props: GlobalLayoutProps) {
                     <DrawerHeader>Filters</DrawerHeader>
 
                     <DrawerBody padding={0}>
-                        <Accordion defaultIndex={[0]} allowMultiple>
+                        <Accordion defaultIndex={[]} allowMultiple>
                             <Box>
                                 <Text>Selected Filters</Text>
                                 {filters.Type.map(v => {
@@ -107,8 +119,9 @@ export function GlobalLayout(props: GlobalLayoutProps) {
                             <AccordionItem>
                                 <h2>
                                     <AccordionButton p={'1rem'} justifyContent={'space-between'}>
-                                        <Box>
+                                        <Box display={'flex'} alignItems={'baseline'}>
                                             <Text fontSize={'1.25rem'} fontWeight={400}>Price</Text>
+                                            <Text fontSize={'0.875rem'} fontWeight={400}>${ctx.priceFilter[0]} - ${ctx.priceFilter[1]}</Text>
                                         </Box>
                                         <AccordionIcon/>
                                     </AccordionButton>
@@ -142,7 +155,7 @@ export function GlobalLayout(props: GlobalLayoutProps) {
                                     </AccordionButton>
                                 </h2>
                                 <AccordionPanel marginRight={'0.25rem'} marginLeft={'-0.25rem'} paddingX={'1.5rem'} paddingTop={0} paddingBottom={'2rem'}>
-                                    <CheckboxGroup onChange={handleTypeChange} options={guestsOptions}/>
+                                    <CheckboxGroup onChange={handleGuestsChange} options={guestsOptions}/>
                                 </AccordionPanel>
                             </AccordionItem>
                             <AccordionItem>
@@ -150,7 +163,7 @@ export function GlobalLayout(props: GlobalLayoutProps) {
                                     <AccordionButton p={'1rem'} justifyContent={'space-between'}>
                                         <Box display={'flex'} flexDirection={'column'} alignItems={'start'}>
                                             <Text fontSize={'1.25rem'} fontWeight={400}>Type</Text>
-                                            <Text fontSize={'0.875rem'}>{filters.Type.map((v: string|number) => typeof v === "number" ? v=v.toString() : v.charAt(0).concat(v.substring(1).toLowerCase())).toString().replaceAll(',', ', ')}</Text>
+                                            <Text fontSize={'0.875rem'}>{ctx.typesFilter.map((v: string|number) => typeof v === "number" ? v=v.toString() : v.charAt(0).concat(v.substring(1).toLowerCase())).toString().replaceAll(',', ', ')}</Text>
                                             {/*<Badge colorScheme={'blue'} variant={'subtle'}>{filters.Type}</Badge>*/}
                                         </Box>
                                         <AccordionIcon/>
@@ -170,7 +183,7 @@ export function GlobalLayout(props: GlobalLayoutProps) {
                                     </AccordionButton>
                                 </h2>
                                 <AccordionPanel marginRight={'0.25rem'} marginLeft={'-0.25rem'} paddingX={'1.5rem'} paddingTop={0} paddingBottom={'2rem'}>
-
+                                    <StarsCheckboxGroup onChange={handleStarChange} options={propertyTypeOptions}/>
                                 </AccordionPanel>
                             </AccordionItem>
                         </Accordion>
