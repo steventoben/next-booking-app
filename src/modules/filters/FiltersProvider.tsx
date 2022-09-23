@@ -100,7 +100,7 @@ export function FiltersProvider(props: FiltersProviderProps) {
     const [filtersState, setFiltersState] = React.useState(filters);
     //const [activeFilters, setActiveFilters] = React.useState();
     const [priceFilter, setPriceFilter] = React.useState([0, 1000]);
-    const [locationFilter, setLocationFilter] = React.useState();
+    const [locationFilter, setLocationFilter] = React.useState(25);
     const [guestsFilter, setGuestsFilter] = React.useState();
     const [typesFilter, setTypesFilter] = React.useState([]);
     const [ratingFilter, setRatingFilter] = React.useState();
