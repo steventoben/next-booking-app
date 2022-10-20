@@ -20,11 +20,15 @@ import {FiltersProvider} from "../../src/modules/filters/FiltersProvider";
 import {HiLocationMarker} from "react-icons/hi";
 import {BiCurrentLocation} from "react-icons/bi";
 import {GrLocationPin} from "react-icons/gr";
+import {SearchWithFiltersRow} from "../../src/modules/search/SearchWithFiltersRow";
 
 
 const ListingsPage: NextPage = () => {
     return(
         <GlobalLayout>
+            <Box zIndex={'10000'} marginTop={'4rem'}>
+                <SearchWithFiltersRow/>
+            </Box>
             <Box bg={useColorModeValue('gray.100', 'gray.900')} display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'center'} height={'20rem'}>
                 <InputGroup marginBottom={'1rem'} size={'lg'} paddingX={{base: '1rem'}} maxWidth={'40rem'}>
                     <InputAddon bg={'white'}>
@@ -48,8 +52,8 @@ const ListingsPage: NextPage = () => {
                 </Box>*/}
             </Box>
             <Box display={'flex'} bg={useColorModeValue('gray.100', 'gray.900')}>
-                <FacetsList/>
-                <Box display={{base: 'none', lg: 'block'}} width={'20rem'}/>
+                {/*<FacetsList/>*/}
+                {/*<Box display={{base: 'none', lg: 'block'}} width={'20rem'}/>*/}
                 <PropertyListingsGrid/>
             </Box>
         </GlobalLayout>

@@ -31,7 +31,7 @@ import {useQuery} from "../../hooks/useQuery";
 
 const Links = ['Link One', 'Link Two', 'Link Three', 'Link Four'];
 
-export const propertyTypeOptions: OptionType[] = [
+const propertyTypeOptions: OptionType[] = [
     {value: 'HOUSE', label: 'House'},
     {value: 'HOTEL', label: 'Hotel'},
     {value: 'APARTMENT', label: 'Apartment'},
@@ -57,7 +57,7 @@ const locationRangeOptions: OptionType[] = [
 interface GlobalLayoutProps {
     children: ReactNode;
 }
-export function GlobalLayout(props: GlobalLayoutProps) {
+export function Layout(props: GlobalLayoutProps) {
     const {
         children
     } = props;
@@ -92,7 +92,7 @@ export function GlobalLayout(props: GlobalLayoutProps) {
     }
     return(
         <>
-            <Box display={'flex'} justifyContent={'space-between'} alignItems={'center'} as={'header'} width={'100%'} bg={useColorModeValue('gray.50', 'gray.900')} top={0} position={'fixed'} zIndex={1000} height={'4rem'} px={'1rem'}>
+            <Box display={'flex'} justifyContent={'space-between'} alignItems={'center'} as={'header'} width={'100%'} bg={useColorModeValue('gray.50', 'gray.900')} position={'fixed'} zIndex={1000} height={'4rem'} px={'1rem'}>
                 <Box>
                     <Text>Logo</Text>
                 </Box>
@@ -113,15 +113,8 @@ export function GlobalLayout(props: GlobalLayoutProps) {
                     <DrawerHeader>Filters</DrawerHeader>
 
                     <DrawerBody padding={0}>
-                        <Accordion defaultIndex={[]} allowMultiple>
-                            {/*<Box>
-                                <Text>Selected Filters</Text>
-                                {filters.Type.map(v => {
-                                    return(
-                                        <Tag key={v}><TagLabel>{v}</TagLabel><TagCloseButton onClick={()=>setFilters(prevState => ({...prevState, 'Type': prevState.Type.filter(val => val !== v)}))}/></Tag>
-                                    );
-                                })}
-                            </Box>*/}
+                        {/*<Accordion defaultIndex={[]} allowMultiple>
+
                             <AccordionItem>
                                 <h2>
                                     <AccordionButton p={'1rem'} justifyContent={'space-between'}>
@@ -170,7 +163,7 @@ export function GlobalLayout(props: GlobalLayoutProps) {
                                         <Box display={'flex'} flexDirection={'column'} alignItems={'start'}>
                                             <Text fontSize={'1.25rem'} fontWeight={400}>Type</Text>
                                             <Text fontSize={'0.875rem'}>{ctx.typesFilter.map((v: string|number) => typeof v === "number" ? v=v.toString() : v.charAt(0).concat(v.substring(1).toLowerCase())).toString().replaceAll(',', ', ')}</Text>
-                                            {/*<Badge colorScheme={'blue'} variant={'subtle'}>{filters.Type}</Badge>*/}
+                                            <Badge colorScheme={'blue'} variant={'subtle'}>{filters.Type}</Badge>
                                         </Box>
                                         <AccordionIcon/>
                                     </AccordionButton>
@@ -192,7 +185,7 @@ export function GlobalLayout(props: GlobalLayoutProps) {
                                     <StarsCheckboxGroup onChange={handleStarChange} options={propertyTypeOptions}/>
                                 </AccordionPanel>
                             </AccordionItem>
-                        </Accordion>
+                        </Accordion>*/}
                     </DrawerBody>
 
                     <DrawerFooter>

@@ -36,15 +36,23 @@ export function CheckboxGroup(props: CheckboxGroupProps) {
         console.log(value);
         console.log(ev);
         onGroupChange(ev.target.getAttribute('value')||'');
-        if(onChangeCb) {
+        /*if(onChangeCb) {
             onChangeCb(ev, value);
-        }
+        }*/
     }
     useUpdateEffect(()=>{
         if(onChangeCb) {
             onChangeCb(null, value);
         }
     },[value]);
+    useUpdateEffect(() => {
+        if(onChangeCb) {
+            console.log(activeValues);
+            console.log(value);
+            setValue(activeValues);
+            onChangeCb(null, activeValues);
+        }
+    }, [activeValues]);
     return(
         <Stack>
             {options.map((option) => {

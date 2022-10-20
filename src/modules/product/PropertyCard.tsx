@@ -43,7 +43,7 @@ export const PROPERTY_LISTINGS: PropertyListing[] = [
         price: 600,
         propertyType: PropertyTypes.House,
         guests: 4,
-        location: 'Austin, TX',
+        location: 'Austin, TX', //NY
         imageUrl: 'https://shop-sample-media.s3.us-east-2.amazonaws.com/re/greg-rivers-rChFUMwAe7E-unsplash.jpg',
         facets: {
             beds: 4,
@@ -58,7 +58,7 @@ export const PROPERTY_LISTINGS: PropertyListing[] = [
         price: 290,
         propertyType: PropertyTypes.House,
         guests: 4,
-        location: 'Austin, TX',
+        location: 'Austin, TX', //limq
         imageUrl: 'https://shop-sample-media.s3.us-east-2.amazonaws.com/re/alejandra-cifre-gonzalez-ylyn5r4vxcA-unsplash.jpg',
         facets: {
             beds: 2,
@@ -73,7 +73,7 @@ export const PROPERTY_LISTINGS: PropertyListing[] = [
         price: 1150,
         propertyType: PropertyTypes.House,
         guests: 4,
-        location: 'Austin, TX',
+        location: 'Austin, TX', //toronto
         imageUrl: 'https://shop-sample-media.s3.us-east-2.amazonaws.com/re/florian-schmidinger-b_79nOqf95I-unsplash.jpg',
         facets: {
             beds: 2,
